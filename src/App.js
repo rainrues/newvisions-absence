@@ -7,9 +7,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <ol>
-          <List></List>
-        </ol>
+          <List threshold={61} ></List>
       </header>
     </div>
   );
