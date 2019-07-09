@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-          <List threshold={61} dataType={"studentId"} ></List>
+        <List threshold={61} dataType={"attendancePercentage"} ></List>
       </header>
     </div>
   );

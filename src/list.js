@@ -25,8 +25,7 @@ class List extends React.Component {
     // to an array of formatted student list items
     students.forEach( (student) => {
       if (student.attendancePercentage < this.state.threshold) {
-        let studentListItem = <li>{student.firstName} {student.lastName} 
-                              - {student[this.state.dataType]}</li>;
+        let studentListItem = <li>{student.firstName} {student.lastName} - {student[this.state.dataType]}</li>;
         formattedList.push(studentListItem);
       }
     });
@@ -65,10 +64,14 @@ class List extends React.Component {
             </label>
             <p>Type of Data:</p> 
               <input type="radio" name="data" 
+                     value="attendancePercentage" 
+                     onClick={this.handleClick("attendancePercentage")} 
+                     // This line is necessary to allow for default selection of this button
+                     checked={"attendancePercentage" === this.state.checked ? "checked" : ""}
+              /> Attendance Percentage<br></br>
+              <input type="radio" name="data" 
                      value="studentId" 
                      onClick={this.handleClick("studentId")} 
-                     // This line is necessary to allow for default selection of this button
-                     checked={"studentId" === this.state.checked ? "checked" : ""}
               /> Student Id<br></br>
               <input type="radio" name="data" 
                      value="guidanceCounselorEmail" 
