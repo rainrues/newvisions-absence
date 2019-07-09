@@ -23,10 +23,11 @@ class List extends React.Component {
       }
     });
 
+    // QUESTION QUESTION QUESTION QUESTION QUESTION QUESTION
     belowThreshold.forEach( (ele) => {
       const type = this.state.dataType;
-      let data = ele.type;
-      let newElement = <li>{ele.firstName} {ele.lastName} {data}</li>;
+      let data = ele[type];
+      let newElement = <li>{ele.firstName} {ele.lastName} - {data}</li>;
       formattedList.push(newElement);
     });
 
