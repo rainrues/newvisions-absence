@@ -4,7 +4,10 @@ import React from 'react';
 class List extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {threshold: this.props.threshold};
+    this.state = {
+      threshold: this.props.threshold,
+      dataType: this.props.dataType
+    };
     this.update = this.update.bind(this);
   }
 
@@ -21,7 +24,9 @@ class List extends React.Component {
     });
 
     belowThreshold.forEach( (ele) => {
-      let newElement = <li>{ele.firstName} {ele.lastName} {ele.studentId}</li>;
+      const type = this.state.dataType;
+      let data = ele.type;
+      let newElement = <li>{ele.firstName} {ele.lastName} {data}</li>;
       formattedList.push(newElement);
     });
 
@@ -34,23 +39,34 @@ class List extends React.Component {
     };
   }
 
+  handleClick(field) {
+    return (e) => {
+      this.setState({ dataType: field })
+    };
+  }
+
   render() {
     return(
       <div>
-        <form>
-          <h2 className="heading">Chronically Absent Students</h2>
-          <br></br>
-          <p>Threshold percentage:</p>
-          <label htmlFor="Threshold">
-            <input className="input" type="integer" onChange={this.update()} placeholder={this.state.threshold} />
-          </label>
-        </form>
+        <h2 className="heading">Chronically Absent Students</h2>
+          <form>
+            <br></br>
+            <p>Threshold percentage:</p>
+            <label htmlFor="Threshold">
+              <input className="input" type="integer" onChange={this.update()} placeholder={this.state.threshold} />
+            </label>
+            <p>Type of Data:</p>
+          <input type="radio" name="data" value="studentId" onClick={this.handleClick("studentId")}/> Student Id<br></br>
+          <input type="radio" name="data" value="guidanceCounselorEmail" onClick={this.handleClick("guidanceCounselorEmail")}/> Guidance Counselor Email<br></br>
+          <input type="radio" name="data" value="homePhoneNumber" onClick={this.handleClick("homePhoneNumber")}/> Home Phone Number<br></br>
+          <input type="radio" name="data" value="advisor" onClick={this.handleClick("advisor")}/> Advisor<br></br>
+          </form>
         <br></br>
         <br></br>
-        <h3>Number of students = {this.formatList().length}</h3>
-        <ul>
-          {this.formatList()}
-        </ul>
+          <h3>Number of students = {this.formatList().length}</h3>
+          <ul>
+            {this.formatList()}
+          </ul>
       </div>
     );
   }
